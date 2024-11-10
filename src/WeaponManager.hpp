@@ -4,10 +4,11 @@
 #include "WeaponData.hpp"
 
 class WeaponManager {
+protected:
+	WeaponManager() = default;
+
 private:
 	std::unordered_map<WeaponType, WeaponData> weaponData;
-
-	WeaponManager() = default;
 
 public:
 	static std::shared_ptr<WeaponManager> getInstance();

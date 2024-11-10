@@ -23,6 +23,8 @@ target_sources(main
         src/TileMap.cpp
         src/AnimComponent.cpp
         src/Anim.cpp
+        src/WeaponManager.cpp
+        src/Weapon.cpp
 )
 
 target_precompile_headers(main PRIVATE pch.hpp)

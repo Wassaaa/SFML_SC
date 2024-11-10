@@ -21,7 +21,7 @@ Anim::~Anim()
 
 void Anim::addFrame(const sf::IntRect &frame)
 {
-	frames.push_back(frame);
+	frames.emplace_back(frame);
 }
 
 bool Anim::update(float dt)

@@ -41,6 +41,18 @@ void AnimComponent::addAnim(const PlayerState animState,
 	}
 }
 
+void AnimComponent::addAnim(const PlayerState animState, AnimInfo animInfo)
+{
+	this->addAnim(
+		animState,
+		animInfo.frameSize,
+		animInfo.startPos,
+		animInfo.frameCount,
+		animInfo.frameDuration,
+		animInfo.loop
+		);
+}
+
 void AnimComponent::playAnimation(PlayerState anim)
 {
 	if (this->currentAnimation != anim)

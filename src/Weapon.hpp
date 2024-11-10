@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "AnimComponent.hpp"
+#include "WeaponManager.hpp"
 #include "WeaponData.hpp"
 
 
@@ -11,12 +12,16 @@ public:
 	Weapon(WeaponType type);
 	~Weapon();
 
-	void update(float& dt);
+	void update(float& dt, sf::Vector2f playerPos);
 	void render(sf::RenderTarget& target);
 	
 	// Getters
-	float getDamage() const { return damage; }
-	float getAttackSpeed() const { return Speed; }
+	float getDamage() const { return this->currentDamage; }
+	float getAttackSpeed() const { return this->currentSpeed; }
+	float getCritChance() const { return this->currentCritChance; }
+	float getCritDamage() const { return this->currentCritDamage; }
+	float getCurrentRange() const { return this->currentRange; }
+
 	
 	// Initialize weapon stats based on type
 	void initShape();
@@ -25,15 +30,16 @@ public:
 	void initAnim();
 
 private:
-	const WeaponType type;
-	AnimComponent animations;
+	WeaponType type;
+	const WeaponData *data;
 	sf::Sprite sprite;
+	AnimComponent animations;
 	std::unique_ptr<sf::Shape> shape;
 	
 	// Base stats
-	float damage;
-	float Speed;
-	float critChance;
-	float critMultiplier;
-	float range;
+	float currentDamage;
+	float currentSpeed;
+	float currentCritChance;
+	float currentCritDamage;
+	float currentRange;
 };

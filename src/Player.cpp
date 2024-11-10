@@ -17,6 +17,10 @@ void Player::update(float &dt)
 	this->updateMovement();
 	this->updatePhysics();
 	this->updateAnim(dt);
+	for (auto &weapon : this->weapons)
+	{
+		weapon.update(dt, this->getPosition());
+	}
 }
 
 void Player::render(sf::RenderTarget &target)
@@ -111,6 +115,11 @@ PlayerState Player::determineState()
 	if (this->velocity.x < 0.f)
 		return PlayerState::LEFT;
 	return PlayerState::IDLE;
+}
+
+void Player::addWeapon(WeaponType type)
+{
+	this->weapons.emplace_back(type);
 }
 
 const sf::Vector2f Player::getPosition() const

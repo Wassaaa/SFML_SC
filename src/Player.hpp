@@ -3,6 +3,7 @@
 # include "../pch.hpp"
 # include "AnimComponent.hpp"
 # include "AnimationStates.hpp"
+# include "Weapon.hpp"
 
 class Player
 {
@@ -20,6 +21,8 @@ public:
 	void move(const float dir_x, const float dir_y);
 	void updateSpriteFacing();
 	PlayerState determineState();
+	//weapons
+	void addWeapon(WeaponType type);
 	//accessors
 	const sf::Vector2f getPosition() const;
 	const sf::FloatRect getGlobalBounds() const;
@@ -30,6 +33,9 @@ private:
 	sf::Sprite sprite;
 	sf::Texture textureSheet;
 	AnimComponent animations;
+
+	//weapons
+	std::vector<Weapon> weapons;
 
 
 	//vars

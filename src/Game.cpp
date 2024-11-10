@@ -7,6 +7,7 @@ Game::Game()
 	this->initTileSheet();
 	this->initTileMap();
 	this->initPlayer();
+	WeaponManager::getInstance()->loadWeaponData();
 }
 
 Game::~Game()

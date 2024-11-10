@@ -14,6 +14,7 @@ public:
 	void addAnim(const PlayerState animState, const sf::Vector2i& frameSize,
 				const sf::Vector2i& startPos, size_t frames, sf::Time frameDuration,
 				bool loop);
+	void addAnim(const PlayerState animState, AnimInfo animInfo);
 	void playAnimation(PlayerState anim);
 	void update(float dt);
 

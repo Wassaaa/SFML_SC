@@ -10,7 +10,13 @@ void WeaponManager::loadWeaponData() {
 	// LASER - Fast, medium damage, long range, precise
 	{
 		WeaponData& laser = weaponData[WeaponType::LASER];
-		laser.animations.loadTexture("");
+		//anim info
+		laser.weaponAnim.texturePath = "needTexture";
+		laser.weaponAnim.frameSize = {20, 20};
+		laser.weaponAnim.startPos = {0, 0};
+		laser.weaponAnim.frameCount = 5;
+		laser.weaponAnim.frameDuration = sf::milliseconds(100);
+		laser.weaponAnim.loop = true;
 		laser.baseDamage = 8.f;
 		laser.baseSpeed = 0.15f;		// Attacks very frequently
 		laser.baseRange = 400.f;		// Long range
@@ -24,7 +30,12 @@ void WeaponManager::loadWeaponData() {
 	// EXPLOSIONS - Slow, high damage, medium range, area damage
 	{
 		WeaponData& explosion = weaponData[WeaponType::EXPLOSIONS];
-		explosion.animations.loadTexture("");
+		explosion.weaponAnim.texturePath = "needTexture";
+		explosion.weaponAnim.frameSize = {20, 20};
+		explosion.weaponAnim.startPos = {0, 0};
+		explosion.weaponAnim.frameCount = 5;
+		explosion.weaponAnim.frameDuration = sf::milliseconds(100);
+		explosion.weaponAnim.loop = true;
 		explosion.baseDamage = 25.f;
 		explosion.baseSpeed = 1.2f;			// Slow attacks
 		explosion.baseRange = 250.f;		// Medium range
@@ -38,7 +49,12 @@ void WeaponManager::loadWeaponData() {
 	// CONE_CLEAVE - Medium speed, medium damage, short range, wide area
 	{
 		WeaponData& cone = weaponData[WeaponType::CONE_CLEAVE];
-		cone.animations.loadTexture("");
+		cone.weaponAnim.texturePath = "needTexture";
+		cone.weaponAnim.frameSize = {20, 20};
+		cone.weaponAnim.startPos = {0, 0};
+		cone.weaponAnim.frameCount = 5;
+		cone.weaponAnim.frameDuration = sf::milliseconds(100);
+		cone.weaponAnim.loop = true;
 		cone.baseDamage = 15.f;
 		cone.baseSpeed = 0.8f;			// Medium attack speed
 		cone.baseRange = 150.f;			// Short range

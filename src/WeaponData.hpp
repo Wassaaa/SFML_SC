@@ -1,8 +1,8 @@
 #pragma once
-#include "AnimComponent.hpp"
+#include "AnimationStates.hpp"
 
 struct WeaponData {
-	AnimComponent animations;
+	AnimInfo weaponAnim;
 	float baseDamage;
 	float baseSpeed;
 	float baseRange;
@@ -12,6 +12,8 @@ struct WeaponData {
 	float baseCD;
 	float baseDuration;
 };
+
+
 
 enum class WeaponType {
 	LASER,
