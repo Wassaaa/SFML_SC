@@ -1,9 +1,8 @@
 #include "WeaponManager.hpp"
 
-std::shared_ptr<WeaponManager> WeaponManager::getInstance()
+WeaponManager& WeaponManager::getInstance()
 {
-	static auto instance = std::make_shared<WeaponManager>();
-	return instance;
+	return t
 }
 
 void WeaponManager::loadWeaponData() {

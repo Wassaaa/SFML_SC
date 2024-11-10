@@ -30,11 +30,10 @@ public:
 	void initAnim();
 
 private:
-	WeaponType type;
+	const WeaponType type;
 	const WeaponData *data;
 	sf::Sprite sprite;
 	AnimComponent animations;
-	std::unique_ptr<sf::Shape> shape;
 	
 	// Base stats
 	float currentDamage;
