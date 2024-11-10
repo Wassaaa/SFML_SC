@@ -36,14 +36,17 @@ void Player::updateMovement()
 		case PlayerState::IDLE:
 			animations.playAnimation(PlayerState::IDLE);
 			break;
-		case PlayerState::WALKING:
-			animations.playAnimation(PlayerState::WALKING);
+		case PlayerState::UP:
+			animations.playAnimation(PlayerState::UP);
 			break;
-		case PlayerState::JUMPING:
-			animations.playAnimation(PlayerState::JUMPING);
+		case PlayerState::RIGHT:
+			animations.playAnimation(PlayerState::RIGHT);
 			break;
-		case PlayerState::FALLING:
-			animations.playAnimation(PlayerState::FALLING);
+		case PlayerState::DOWN:
+			animations.playAnimation(PlayerState::DOWN);
+			break;
+		case PlayerState::LEFT:
+			animations.playAnimation(PlayerState::LEFT);
 			break;
 
 		default:
@@ -59,19 +62,13 @@ void Player::updateAnim(float &dt)
 
 void Player::updatePhysics()
 {
-	// gravity
-	this->velocity.y += 1.0 * this->gravity;
-	if (std::abs(this->velocity.y) > this->velocityMaxY)
-		this->velocity.y = this->velocityMaxY * ((this->velocity.y < 0) ?
-				-1.f : 1.f);
-	// limit gravity
-	if (std::abs(this->velocity.y) < this->velocityMin)
-		this->velocity.y = 0.f;
 	// deceleration
 	this->velocity *= this->drag;
 	// limit deceleration
 	if (std::abs(this->velocity.x) < this->velocityMin)
 		this->velocity.x = 0.f;
+	if (std::abs(this->velocity.y) < this->velocityMin)
+		this->velocity.y = 0.f;
 	this->sprite.move(this->velocity);
 }
 
@@ -84,14 +81,9 @@ void Player::move(const float dir_x, const float dir_y)
 	if (std::abs(this->velocity.x) > this->velocityMax)
 		this->velocity.x = this->velocityMax * ((this->velocity.x < 0) ?
 				-1.f : 1.f);
-}
-
-void Player::jump()
-{
-	if (!this->canjump)
-		return ;
-	this->velocity.y = -50.f;
-	this->canjump = false;
+	if (std::abs(this->velocity.y) > this->velocityMax)
+		this->velocity.y = this->velocityMax * ((this->velocity.y < 0) ?
+				-1.f : 1.f);
 }
 
 void Player::updateSpriteFacing()
@@ -111,11 +103,13 @@ void Player::updateSpriteFacing()
 PlayerState Player::determineState()
 {
 	if (this->velocity.y < 0.f)
-		return PlayerState::JUMPING;
+		return PlayerState::UP;
 	if (this->velocity.y > 0.f)
-		return PlayerState::FALLING;
-	if (velocity.x != 0.f)
-		return PlayerState::WALKING;
+		return PlayerState::DOWN;
+	if (this->velocity.x > 0.f)
+		return PlayerState::RIGHT;
+	if (this->velocity.x < 0.f)
+		return PlayerState::LEFT;
 	return PlayerState::IDLE;
 }
 
@@ -134,17 +128,9 @@ void Player::setPosition(const float x, const float y)
 	this->sprite.setPosition(x, y);
 }
 
-void Player::resetVelocityY()
-{
-	this->velocity.y = 0.f;
-	this->canjump = true;
-}
-
 void Player::initVariables()
 {
-	this->moveDirection = MoveDir::RIGHT;
-	this->currentState = PlayerState::IDLE;
-	this->canjump = true;
+	this->currentState = PlayerState::NOTHING;
 	this->scale = 3.f;
 }
 
@@ -159,20 +145,20 @@ void Player::initAnim()
 		std::cout << "ERROR::PLAYER::INIT_ANIM::LOAD_TEXTURE\n";
 	animations.addAnim(PlayerState::IDLE, {100, 100}, {0, 0}, 6,
 		sf::Time(sf::milliseconds(100)), true);
-	animations.addAnim(PlayerState::WALKING, {100, 100}, {0, 1}, 8,
+	animations.addAnim(PlayerState::UP, {100, 100}, {0, 1}, 8,
 		sf::Time(sf::milliseconds(100)), true);
-	animations.addAnim(PlayerState::JUMPING, {100, 100}, {0, 2}, 6,
-		sf::Time(sf::milliseconds(50)), false);
-	animations.addAnim(PlayerState::FALLING, {100, 100}, {0, 3}, 6,
-		sf::Time(sf::milliseconds(50)), false);
+	animations.addAnim(PlayerState::RIGHT, {100, 100}, {0, 1}, 8,
+		sf::Time(sf::milliseconds(100)), true);
+	animations.addAnim(PlayerState::DOWN, {100, 100}, {0, 1}, 8,
+		sf::Time(sf::milliseconds(100)), true);
+	animations.addAnim(PlayerState::LEFT, {100, 100}, {0, 1}, 8,
+		sf::Time(sf::milliseconds(100)), true);
 }
 
 void Player::initPhysics()
 {
 	this->velocityMax = 10.f;
-	this->velocityMin = 1.f;
-	this->acceleration = 3.f;
+	this->velocityMin = .1f;
+	this->acceleration = 1.f;
 	this->drag = 0.92f;
-	this->gravity = 2.f;
-	this->velocityMaxY = 45.f;
 }

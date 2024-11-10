@@ -4,14 +4,17 @@
 enum PlayerState {
 	NOTHING,
 	IDLE,
-	JUMPING,
-	FALLING,
-	WALKING
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
 };
 
-enum MoveDir {
-	RIGHT,
-	LEFT
+enum Keybindings {
+	MOVE_UP,
+	MOVE_RIGHT,
+	MOVE_DOWN,
+	MOVE_LEFT
 };
 
 #endif

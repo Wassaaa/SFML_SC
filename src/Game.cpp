@@ -31,12 +31,14 @@ void Game::updateInput()
 	sf::IntRect random_rect = sf::IntRect(rand_x * this->tileSize, rand_y * this->tileSize, this->tileSize, this->tileSize);
 
 	//player movement
-	if (sf::Keyboard::isKeyPressed(this->keyboardMappings["MOVE_LEFT"]))
+	if (sf::Keyboard::isKeyPressed(this->keyboardMappings[MOVE_LEFT]))
 		this->player.get()->move(-1.f, 0.f);
-	else if (sf::Keyboard::isKeyPressed(this->keyboardMappings["MOVE_RIGHT"]))
+	else if (sf::Keyboard::isKeyPressed(this->keyboardMappings[MOVE_RIGHT]))
 		this->player.get()->move(1.f, 0.f);
-	if (sf::Keyboard::isKeyPressed(this->keyboardMappings["JUMP"]))
-		this->player.get()->jump();
+	if (sf::Keyboard::isKeyPressed(this->keyboardMappings[MOVE_UP]))
+		this->player.get()->move(0.f, -1.f);
+	if (sf::Keyboard::isKeyPressed(this->keyboardMappings[MOVE_DOWN]))
+		this->player.get()->move(0.f, 1.f);
 	//tile functions
 	if (sf::Mouse::isButtonPressed(this->mouseMappings["BTN_ADD_TILE"]))
 		this->tileMap.get()->addTile(x / tile_size, y / tile_size, this->tileScale, random_rect);
@@ -62,7 +64,6 @@ void Game::update()
 		}
 	this->updateInput();
 	this->updatePlayer();
-	this->updateCollision();
 	this->updateTileMap();
 }
 
@@ -90,18 +91,6 @@ void Game::updatePlayer()
 	this->player.get()->update(dt());
 }
 
-void Game::updateCollision()
-{
-	sf::Vector2f pos = this->player.get()->getPosition();
-	sf::FloatRect bounds = this->player.get()->getGlobalBounds();
-	if (pos.y + bounds.height >= this->window.getSize().y)
-	{
-		this->player.get()->resetVelocityY();
-		this->player.get()->setPosition(pos.x, this->window.getSize().y
-			- bounds.height);
-	}
-}
-
 void Game::updateTileMap()
 {
 	this->tileMap.get()->update();
@@ -117,9 +106,10 @@ void Game::initInput()
 {
 	this->mouseMappings["BTN_ADD_TILE"] = sf::Mouse::Button::Left;
 	this->mouseMappings["BTN_REMOVE_TILE"] = sf::Mouse::Button::Right;
-	this->keyboardMappings["MOVE_LEFT"] = sf::Keyboard::Key::A;
-	this->keyboardMappings["MOVE_RIGHT"] = sf::Keyboard::Key::D;
-	this->keyboardMappings["JUMP"] = sf::Keyboard::Key::W;
+	this->keyboardMappings[MOVE_UP] = sf::Keyboard::Key::W;
+	this->keyboardMappings[MOVE_RIGHT] = sf::Keyboard::Key::D;
+	this->keyboardMappings[MOVE_DOWN] = sf::Keyboard::Key::S;
+	this->keyboardMappings[MOVE_LEFT] = sf::Keyboard::Key::A;
 }
 
 void Game::initPlayer()

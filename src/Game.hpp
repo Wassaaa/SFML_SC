@@ -16,7 +16,6 @@ public:
 	void updateInput();
 	void update();
 	void updatePlayer();
-	void updateCollision();
 	void updateTileMap();
 
 	void render();
@@ -35,7 +34,7 @@ private:
 
 	std::shared_ptr<Player> player;
 	std::shared_ptr<TileMap> tileMap;
-	std::map<std::string, sf::Keyboard::Key> keyboardMappings;
+	std::map<Keybindings, sf::Keyboard::Key> keyboardMappings;
 	std::map<std::string, sf::Mouse::Button> mouseMappings;
 	//variables
 	float deltaTime;

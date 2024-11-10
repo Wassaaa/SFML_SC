@@ -18,7 +18,6 @@ public:
 	void updateAnim(float &dt);
 	//movement
 	void move(const float dir_x, const float dir_y);
-	void jump();
 	void updateSpriteFacing();
 	PlayerState determineState();
 	//accessors
@@ -26,7 +25,6 @@ public:
 	const sf::FloatRect getGlobalBounds() const;
 
 	void setPosition(const float x, const float y);
-	void resetVelocityY();
 
 private:
 	sf::Sprite sprite;
@@ -38,7 +36,6 @@ private:
 	float scale;
 
 	//Movement
-	MoveDir moveDirection;
 	PlayerState currentState;
 	//Animation
 
@@ -48,9 +45,6 @@ private:
 	float velocityMin;
 	float acceleration;
 	float drag;
-	float gravity;
-	float velocityMaxY;
-	bool canjump;
 
 
 	void initVariables();
