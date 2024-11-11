@@ -2,9 +2,10 @@
 
 Weapon::Weapon(WeaponType type):
 	type(type),
-	data(&WeaponManager::getInstance()->getWeaponData(type)),
+	data(&WeaponManager::getInstance().getWeaponData(type)),
 	animations(sprite)
 {
+	this->initSprite();
 	this->initAnim();
 }
 
@@ -14,7 +15,8 @@ Weapon::~Weapon()
 
 void Weapon::update(float &dt, sf::Vector2f playerPos)
 {
-	this->sprite.setPosition(playerPos);
+	this->sprite.setPosition(playerPos + this->data->offset);
+	this->sprite.rotate(100.f * dt);
 	this->animations.update(dt);
 }
 
@@ -33,7 +35,9 @@ void Weapon::initStats()
 
 void Weapon::initSprite()
 {
-	this->sprite.setColor(sf::Color::Blue);
+	this->sprite.setOrigin(this->data->origin);
+	this->sprite.setRotation(this->data->rotation);
+	// this->sprite.setColor(sf::Color::Blue);
 }
 
 void Weapon::initAnim()

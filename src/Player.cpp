@@ -26,6 +26,10 @@ void Player::update(float &dt)
 void Player::render(sf::RenderTarget &target)
 {
 	target.draw(this->sprite);
+	for (auto &weapon : this->weapons)
+	{
+		weapon.render(target);
+	}
 }
 
 void Player::updateMovement()
@@ -92,16 +96,16 @@ void Player::move(const float dir_x, const float dir_y)
 
 void Player::updateSpriteFacing()
 {
-	if (velocity.x > 0.f)
-	{
-		this->sprite.setOrigin({0, 0});
-		this->sprite.setScale(this->scale, this->scale);
-	}
-	else if (velocity.x < 0.f)
-	{
-		this->sprite.setOrigin({this->sprite.getGlobalBounds().width / this->scale, 0});
-		this->sprite.setScale(-this->scale, this->scale);
-	}
+	// if (velocity.x > 0.f)
+	// {
+	// 	this->sprite.setOrigin({0, 0});
+	// 	this->sprite.setScale(this->scale, this->scale);
+	// }
+	// else if (velocity.x < 0.f)
+	// {
+	// 	this->sprite.setOrigin({this->sprite.getGlobalBounds().width / this->scale, 0});
+	// 	this->sprite.setScale(-this->scale, this->scale);
+	// }
 }
 
 PlayerState Player::determineState()
@@ -141,11 +145,13 @@ void Player::initVariables()
 {
 	this->currentState = PlayerState::NOTHING;
 	this->scale = 3.f;
+	this->playerOrigin = {50.f, 50.f};
 }
 
 void Player::initSprite()
 {
 	this->sprite.setScale(this->scale, this->scale);
+	this->sprite.setOrigin(this->playerOrigin);
 }
 
 void Player::initAnim()

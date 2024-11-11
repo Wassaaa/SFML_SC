@@ -21,10 +21,10 @@ enum Keybindings {
 struct AnimInfo {
 	std::string texturePath;
 	sf::Vector2i frameSize;
-    sf::Vector2i startPos;
-    size_t frameCount;
-    sf::Time frameDuration;
-    bool loop;
+	sf::Vector2i startPos;
+	size_t frameCount;
+	sf::Time frameDuration;
+	bool loop;
 };
 
 #endif

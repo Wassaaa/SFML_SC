@@ -7,11 +7,11 @@ class WeaponManager {
 
 private:
 	std::unordered_map<WeaponType, WeaponData> weaponData;
-	WeaponManager() = default;
-	static WeaponManager instance;
+	WeaponManager() {this->loadWeaponData();};
 
 public:
 	static WeaponManager &getInstance();
+
 	void loadWeaponData();
 	const WeaponData& getWeaponData(WeaponType type) const;
 

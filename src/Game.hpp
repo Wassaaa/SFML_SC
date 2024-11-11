@@ -3,6 +3,7 @@
 # include "../pch.hpp"
 # include "Player.hpp"
 # include "TileMap.hpp"
+# include "WeaponData.hpp"
 
 class Game
 {

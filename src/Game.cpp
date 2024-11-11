@@ -7,7 +7,6 @@ Game::Game()
 	this->initTileSheet();
 	this->initTileMap();
 	this->initPlayer();
-	WeaponManager::getInstance()->loadWeaponData();
 }
 
 Game::~Game()
@@ -116,6 +115,7 @@ void Game::initInput()
 void Game::initPlayer()
 {
 	this->player = std::make_shared<Player>();
+	this->player->addWeapon(WeaponType::LASER);
 }
 
 void Game::initTileSheet()

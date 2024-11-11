@@ -11,6 +11,11 @@ struct WeaponData {
 	float baseCritDamage;
 	float baseCD;
 	float baseDuration;
+
+	//positioning
+	sf::Vector2f origin;
+	sf::Vector2f offset;
+	float rotation;
 };
 
 

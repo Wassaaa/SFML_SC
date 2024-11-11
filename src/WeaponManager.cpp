@@ -1,8 +1,8 @@
 #include "WeaponManager.hpp"
 
-WeaponManager& WeaponManager::getInstance()
-{
-	return t
+WeaponManager& WeaponManager::getInstance() {
+	static WeaponManager instance;
+	return instance;
 }
 
 void WeaponManager::loadWeaponData() {
@@ -10,12 +10,17 @@ void WeaponManager::loadWeaponData() {
 	{
 		WeaponData& laser = weaponData[WeaponType::LASER];
 		//anim info
-		laser.weaponAnim.texturePath = "needTexture";
-		laser.weaponAnim.frameSize = {20, 20};
+		laser.weaponAnim.texturePath = "../../textures/Legacy/Assets/Misc/fantasy weapons set/PNG/10.png";
+		laser.weaponAnim.frameSize = {62, 66};
 		laser.weaponAnim.startPos = {0, 0};
-		laser.weaponAnim.frameCount = 5;
+		laser.weaponAnim.frameCount = 1;
 		laser.weaponAnim.frameDuration = sf::milliseconds(100);
 		laser.weaponAnim.loop = true;
+		//positioning
+		laser.origin = {0.f, 66.f};
+		laser.offset = {0.f, 0.f};
+		laser.rotation = 0.f;
+		//weapon stats
 		laser.baseDamage = 8.f;
 		laser.baseSpeed = 0.15f;		// Attacks very frequently
 		laser.baseRange = 400.f;		// Long range
@@ -35,6 +40,10 @@ void WeaponManager::loadWeaponData() {
 		explosion.weaponAnim.frameCount = 5;
 		explosion.weaponAnim.frameDuration = sf::milliseconds(100);
 		explosion.weaponAnim.loop = true;
+		//positioning
+		explosion.origin = {0.f, 0.f};
+		explosion.offset = {0.f, 0.f};
+		explosion.rotation = 0.f;
 		explosion.baseDamage = 25.f;
 		explosion.baseSpeed = 1.2f;			// Slow attacks
 		explosion.baseRange = 250.f;		// Medium range
@@ -54,6 +63,10 @@ void WeaponManager::loadWeaponData() {
 		cone.weaponAnim.frameCount = 5;
 		cone.weaponAnim.frameDuration = sf::milliseconds(100);
 		cone.weaponAnim.loop = true;
+		//positioning
+		cone.origin = {0.f, 0.f};
+		cone.offset = {0.f, 0.f};
+		cone.rotation = 0.f;
 		cone.baseDamage = 15.f;
 		cone.baseSpeed = 0.8f;			// Medium attack speed
 		cone.baseRange = 150.f;			// Short range

@@ -37,6 +37,9 @@ private:
 	//weapons
 	std::vector<Weapon> weapons;
 
+	//variables
+	sf::Vector2f playerOrigin;
+
 
 	//vars
 	float scale;
